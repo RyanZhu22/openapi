@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/openapi.iml" filepath="$PROJECT_DIR$/.idea/openapi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/openapi-backend/openapi-backend.iml" filepath="$PROJECT_DIR$/openapi-backend/openapi-backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/openapi-client-sdk/openapi-client-sdk.iml" filepath="$PROJECT_DIR$/openapi-client-sdk/openapi-client-sdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/openapi-frontend/openapi-frontend.iml" filepath="$PROJECT_DIR$/openapi-frontend/openapi-frontend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/openapi-interface/openapi-interface.iml" filepath="$PROJECT_DIR$/openapi-interface/openapi-interface.iml" />
     </modules>
   </component>
 </project>

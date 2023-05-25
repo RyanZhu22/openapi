@@ -12,6 +12,19 @@
  */
 export default [
   {
+    path: '/',
+    name: 'home',
+    icon: 'smile',
+    component: './Index',
+  },
+  {
+    path: '/interface_info/:id',
+    name: 'interface',
+    icon: 'smile',
+    component: './InterfaceInfo',
+    hideInMenu: true
+  },
+  {
     path: '/user',
     layout: false,
     routes: [
@@ -26,7 +39,7 @@ export default [
   //   path: '/welcome',
   //   name: 'welcome',
   //   icon: 'smile',
-  //   component: './Welcome',
+  //   component: './Index',
   // },
   {
     path: '/admin',
@@ -38,15 +51,10 @@ export default [
         name: 'interface-manage',
         icon: 'table',
         path: '/admin/interface_info',
-        component: './InterfaceInfo',
+        component: './Admin/InterfaceInfo',
       },
     ],
   },
-
-  // {
-  //   path: '/',
-  //   redirect: '/welcome',
-  // },
   {
     path: '*',
     layout: false,

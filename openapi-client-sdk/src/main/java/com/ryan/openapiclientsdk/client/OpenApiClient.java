@@ -67,7 +67,9 @@ public class OpenApiClient {
             .addHeaders(getHeaderMap(json))
             .body(json)
             .execute();
+        int status = httpResponse.getStatus();
         String result = httpResponse.body();
+        System.out.println(status);
         System.out.println(result);
         return result;
     }

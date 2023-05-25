@@ -83,9 +83,9 @@ const LoginMessage: React.FC<{
 };
 
 const Login: React.FC = () => {
-  const [userLoginState, setUserLoginState] = useState<API.LoginResult>({});
+  const [userLoginState] = useState<API.LoginResult>({});
   const [type, setType] = useState<string>('account');
-  const { initialState, setInitialState } = useModel('@@initialState');
+  const { setInitialState } = useModel('@@initialState');
 
   const containerClassName = useEmotionCss(() => {
     return {
@@ -106,12 +106,12 @@ const Login: React.FC = () => {
       // 登录
       const res = await userLoginUsingPOST({ ...values });
       if (res.data) {
-        const urlParams = new URL(window.location.href).searchParams;
-        history.push(urlParams.get('redirect') || '/');
-        // 如果失败去设置用户错误信息
         setInitialState({
           loginUser: res.data,
         });
+        const urlParams = new URL(window.location.href).searchParams;
+        console.log(urlParams);
+        history.push(urlParams.get('redirect') || '/');
         return;
       }
     } catch (error) {
