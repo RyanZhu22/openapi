@@ -1,94 +1,123 @@
 declare namespace API {
-  type BaseResponseBoolean_ = {
+  type BaseResponseboolean = {
     code?: number;
     data?: boolean;
     message?: string;
   };
 
-  type BaseResponseInt_ = {
+  type BaseResponseint = {
     code?: number;
     data?: number;
     message?: string;
   };
 
-  type BaseResponseInterfaceInfo_ = {
+  type BaseResponseInterfaceInfo = {
     code?: number;
     data?: InterfaceInfo;
     message?: string;
   };
 
-  type BaseResponseListInterfaceInfo_ = {
+  type BaseResponseListInterfaceInfo = {
     code?: number;
     data?: InterfaceInfo[];
     message?: string;
   };
 
-  type BaseResponseLoginUserVO_ = {
+  type BaseResponseListUserInterfaceInfo = {
+    code?: number;
+    data?: UserInterfaceInfo[];
+    message?: string;
+  };
+
+  type BaseResponseLoginUserVO = {
     code?: number;
     data?: LoginUserVO;
     message?: string;
   };
 
-  type BaseResponseLong_ = {
+  type BaseResponselong = {
     code?: number;
     data?: number;
     message?: string;
   };
 
-  type BaseResponsePageInterfaceInfo_ = {
+  type BaseResponseobject = {
     code?: number;
-    data?: PageInterfaceInfo_;
+    data?: Record<string, any>;
     message?: string;
   };
 
-  type BaseResponsePagePostVO_ = {
+  type BaseResponsePageInterfaceInfo = {
     code?: number;
-    data?: PagePostVO_;
+    data?: PageInterfaceInfo;
     message?: string;
   };
 
-  type BaseResponsePageUser_ = {
+  type BaseResponsePagePostVO = {
     code?: number;
-    data?: PageUser_;
+    data?: PagePostVO;
     message?: string;
   };
 
-  type BaseResponsePageUserVO_ = {
+  type BaseResponsePageUser = {
     code?: number;
-    data?: PageUserVO_;
+    data?: PageUser;
     message?: string;
   };
 
-  type BaseResponseString_ = {
+  type BaseResponsePageUserInterfaceInfo = {
+    code?: number;
+    data?: PageUserInterfaceInfo;
+    message?: string;
+  };
+
+  type BaseResponsePageUserVO = {
+    code?: number;
+    data?: PageUserVO;
+    message?: string;
+  };
+
+  type BaseResponsestring = {
     code?: number;
     data?: string;
     message?: string;
   };
 
-  type BaseResponseUser_ = {
+  type BaseResponseUser = {
     code?: number;
     data?: User;
     message?: string;
   };
 
-  type BaseResponseUserVO_ = {
+  type BaseResponseUserInterfaceInfo = {
+    code?: number;
+    data?: UserInterfaceInfo;
+    message?: string;
+  };
+
+  type BaseResponseUserVO = {
     code?: number;
     data?: UserVO;
     message?: string;
   };
 
   type checkUsingGETParams = {
-    /** echostr */
-    echostr?: string;
+    /** timestamp */
+    timestamp?: string;
     /** nonce */
     nonce?: string;
     /** signature */
     signature?: string;
-    /** timestamp */
-    timestamp?: string;
+    /** echostr */
+    echostr?: string;
   };
 
   type DeleteRequest = {
+    id?: number;
+  };
+
+  type getInterfaceInfoByIdUsingGET1Params = {
+    /** id */
     id?: number;
   };
 
@@ -119,6 +148,7 @@ declare namespace API {
     method?: string;
     name?: string;
     requestHeader?: string;
+    requestParams?: string;
     responseHeader?: string;
     status?: number;
     updateTime?: string;
@@ -131,8 +161,15 @@ declare namespace API {
     method?: string;
     name?: string;
     requestHeader?: string;
+    requestParams?: string;
     responseHeader?: string;
     url?: string;
+  };
+
+  type InterfaceInfoInvokeRequest = {
+    id?: number;
+    method?: string;
+    userRequestParams?: string;
   };
 
   type InterfaceInfoUpdateRequest = {
@@ -141,9 +178,21 @@ declare namespace API {
     method?: string;
     name?: string;
     requestHeader?: string;
+    requestParams?: string;
     responseHeader?: string;
     status?: number;
     url?: string;
+  };
+
+  type listInterfaceInfoByPageUsingGET1Params = {
+    current?: number;
+    id?: number;
+    leftNum?: number;
+    pageSize?: number;
+    sortField?: string;
+    sortOrder?: string;
+    status?: number;
+    totalNum?: number;
   };
 
   type listInterfaceInfoByPageUsingGETParams = {
@@ -154,12 +203,24 @@ declare namespace API {
     name?: string;
     pageSize?: number;
     requestHeader?: string;
+    requestParams?: string;
     responseHeader?: string;
     sortField?: string;
     sortOrder?: string;
     status?: number;
     url?: string;
     userId?: number;
+  };
+
+  type listInterfaceInfoUsingGET1Params = {
+    current?: number;
+    id?: number;
+    leftNum?: number;
+    pageSize?: number;
+    sortField?: string;
+    sortOrder?: string;
+    status?: number;
+    totalNum?: number;
   };
 
   type listInterfaceInfoUsingGETParams = {
@@ -170,6 +231,7 @@ declare namespace API {
     name?: string;
     pageSize?: number;
     requestHeader?: string;
+    requestParams?: string;
     responseHeader?: string;
     sortField?: string;
     sortOrder?: string;
@@ -193,7 +255,7 @@ declare namespace API {
     column?: string;
   };
 
-  type PageInterfaceInfo_ = {
+  type PageInterfaceInfo = {
     countId?: string;
     current?: number;
     maxLimit?: number;
@@ -206,7 +268,7 @@ declare namespace API {
     total?: number;
   };
 
-  type PagePostVO_ = {
+  type PagePostVO = {
     countId?: string;
     current?: number;
     maxLimit?: number;
@@ -219,7 +281,7 @@ declare namespace API {
     total?: number;
   };
 
-  type PageUser_ = {
+  type PageUser = {
     countId?: string;
     current?: number;
     maxLimit?: number;
@@ -232,7 +294,20 @@ declare namespace API {
     total?: number;
   };
 
-  type PageUserVO_ = {
+  type PageUserInterfaceInfo = {
+    countId?: string;
+    current?: number;
+    maxLimit?: number;
+    optimizeCountSql?: boolean;
+    orders?: OrderItem[];
+    pages?: number;
+    records?: UserInterfaceInfo[];
+    searchCount?: boolean;
+    size?: number;
+    total?: number;
+  };
+
+  type PageUserVO = {
     countId?: string;
     current?: number;
     maxLimit?: number;
@@ -319,6 +394,18 @@ declare namespace API {
     userAvatar?: string;
     userName?: string;
     userRole?: string;
+  };
+
+  type UserInterfaceInfo = {
+    createTime?: string;
+    id?: number;
+    interfaceInfoId?: number;
+    isDelete?: number;
+    leftNum?: number;
+    status?: number;
+    totalNum?: number;
+    updateTime?: string;
+    userId?: number;
   };
 
   type userLoginByWxOpenUsingGETParams = {

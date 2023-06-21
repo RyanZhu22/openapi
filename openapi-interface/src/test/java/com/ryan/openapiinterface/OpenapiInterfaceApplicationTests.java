@@ -1,26 +1,27 @@
 package com.ryan.openapiinterface;
 
-import com.ryan.openapiclientsdk.client.OpenApiClient;
-import com.ryan.openapiclientsdk.model.User;
+import com.baomidou.mybatisplus.core.toolkit.Assert;
+import com.ryan.openapiinterface.mapper.UserMapper;
+import com.ryan.openapiinterface.model.User;
+import com.ryan.openapiinterface.service.UserService;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @SpringBootTest
 class OpenapiInterfaceApplicationTests {
 
     @Resource
-    private OpenApiClient openApiClient;
+    private UserService userService;
 
     @Test
-    void contextLoads() {
-        String result = openApiClient.getNameByGet("ryan");
-        User user = new User();
-        user.setUsername("ryan");
-        String result1 = openApiClient.getUsernameByPost(user);
-        System.out.println(result);
-        System.out.println(result1);
+    public void testSelect() {
+        System.out.println(("----- selectAll method test ------"));
+        List<User> list = userService.list();
+        System.out.println(list);
     }
 
 }

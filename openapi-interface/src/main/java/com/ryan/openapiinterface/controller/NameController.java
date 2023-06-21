@@ -1,9 +1,13 @@
 package com.ryan.openapiinterface.controller;
 
+import cn.hutool.http.server.HttpServerRequest;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.ryan.openapiclientsdk.model.User;
 import com.ryan.openapiclientsdk.utils.SignUtils;
+import com.ryan.openapiinterface.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -15,12 +19,16 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/name")
 public class NameController {
 
+    @Resource
+    private UserService userService;
+
     @GetMapping("/")
-    public String getNameByGet(String name) {
+    public String getNameByGet(String name, HttpServletRequest request) {
+        System.out.println(request.getHeader("ryan"));
         return "GET 你的名字是" + name;
     }
 
-    @PostMapping("/")
+    @PostMapping("/post")
     public String getNameByPost(@RequestParam String name) {
         return "POST 你的名字是" + name;
     }
@@ -42,6 +50,9 @@ public class NameController {
             throw new RuntimeException("未授权");
         }
         // TODO 时间和当前时间不超过五分钟
+//        if (timestamp) {
+//
+//        }
         // Get current instant.
         long currentTimestamp = System.currentTimeMillis() / 1000;
         System.out.println("CURRENTINSTANT: " + currentTimestamp);
@@ -52,10 +63,14 @@ public class NameController {
             throw new RuntimeException("Timestamp is more than 5 minutes ahead");
         }
         // TODO 实际情况中是从数据库中查出secretKey
-        String serverSign = SignUtils.getSign(body, "123123123");
+        com.ryan.openapiinterface.model.User interfaceUser = userService.selectByAccessKey(accessKey);
+        String serverSign = SignUtils.getSign(body, interfaceUser.getSecretKey());
         if (!sign.equals(serverSign)) {
             throw new RuntimeException("无权限");
         }
-        return "POST 你的名字是" + user.getUsername();
+        // TODO count + 1 after invoking
+        String result = "POST 你的名字是" + user.getUsername();
+
+        return result;
     }
 }

@@ -3,6 +3,7 @@ import { defineConfig } from '@umijs/max';
 import defaultSettings from './defaultSettings';
 import proxy from './proxy';
 import routes from './routes';
+import {join} from "path";
 
 const { REACT_APP_ENV = 'dev' } = process.env;
 
@@ -136,7 +137,7 @@ export default defineConfig({
   openAPI: [
     {
       requestLibPath: "import { request } from '@umijs/max'",
-      schemaPath: 'http://localhost:8080/api/v2/api-docs',
+      schemaPath: "http://127.0.0.1:8080/api/v3/api-docs",
       projectName: 'openapi-backend',
     },
   ],

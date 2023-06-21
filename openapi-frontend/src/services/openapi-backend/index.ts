@@ -7,12 +7,14 @@ import * as interfaceInfoController from './interfaceInfoController';
 import * as postFavourController from './postFavourController';
 import * as postThumbController from './postThumbController';
 import * as userController from './userController';
+import * as userInterfaceInfoController from './userInterfaceInfoController';
 import * as wxMpController from './wxMpController';
 export default {
-  wxMpController,
   fileController,
   interfaceInfoController,
   postFavourController,
   postThumbController,
   userController,
+  userInterfaceInfoController,
+  wxMpController,
 };

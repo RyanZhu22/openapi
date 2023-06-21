@@ -109,9 +109,9 @@ const Login: React.FC = () => {
         setInitialState({
           loginUser: res.data,
         });
-        const urlParams = new URL(window.location.href).searchParams;
-        console.log(urlParams);
-        history.push(urlParams.get('redirect') || '/');
+        // const urlParams = new URL(window.location.href).searchParams;
+        // console.log(urlParams);
+        history.push('/');
         return;
       }
     } catch (error) {

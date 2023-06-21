@@ -1,0 +1,58 @@
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# IntelliJ files
+.idea/
+*.iml
+*.iws
+
+# Eclipse files
+.classpath
+.project
+.settings/
+
+# VS Code files
+.vscode/
+
+# Maven target directory
+target/
+
+# Node modules for React app
+**/node_modules/
+
+# Debug logs from npm
+npm-debug.log
+
+# Yarn integrity file
+.yarn-integrity
+
+# MacOS file
+.DS_Store
+
+# Nacos log files
+nacos/logs/
+
+# Spring Boot application log files
+logs/
+
+# Temporary files
+*~
+*.swp
+*.swo

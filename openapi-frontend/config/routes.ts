@@ -19,7 +19,6 @@ export default [
   },
   {
     path: '/interface_info/:id',
-    name: 'interface',
     icon: 'smile',
     component: './InterfaceInfo',
     hideInMenu: true
