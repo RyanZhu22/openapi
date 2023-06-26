@@ -1,4 +1,4 @@
-package com.ryan.openapi.model.enums;
+package com.ryan.openapi.common.model.enums;
 
 import java.util.Arrays;
 import java.util.List;

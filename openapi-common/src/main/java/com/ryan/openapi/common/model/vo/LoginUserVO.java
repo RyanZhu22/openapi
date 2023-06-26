@@ -1,4 +1,4 @@
-package com.ryan.openapi.model.vo;
+package com.ryan.openapi.common.model.vo;
 
 import lombok.Data;
 

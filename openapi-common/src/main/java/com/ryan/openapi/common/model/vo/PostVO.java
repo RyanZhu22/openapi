@@ -1,9 +1,9 @@
-package com.ryan.openapi.model.vo;
+package com.ryan.openapi.common.model.vo;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import lombok.Data;
-import com.ryan.openapi.model.entity.Post;
+import com.ryan.openapi.common.model.entity.Post;
 import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;

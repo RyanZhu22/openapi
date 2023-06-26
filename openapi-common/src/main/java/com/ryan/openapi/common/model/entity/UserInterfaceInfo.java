@@ -1,4 +1,4 @@
-package com.ryan.openapi.model.entity;
+package com.ryan.openapi.common.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;

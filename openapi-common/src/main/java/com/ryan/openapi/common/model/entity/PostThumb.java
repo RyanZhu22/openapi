@@ -1,4 +1,4 @@
-package com.ryan.openapi.model.entity;
+package com.ryan.openapi.common.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -10,12 +10,12 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 帖子收藏
+ * 帖子点赞
  *
- **/
-@TableName(value = "post_favour")
+ */
+@TableName(value = "post_thumb")
 @Data
-public class PostFavour implements Serializable {
+public class PostThumb implements Serializable {
 
     /**
      * id
