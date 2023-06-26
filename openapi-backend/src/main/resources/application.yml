@@ -1,6 +1,6 @@
 spring:
   application:
-    name: springboot-init
+    name: openapi-backend
   # 默认 dev 环境
   profiles:
     active: dev
@@ -11,14 +11,14 @@ spring:
   # session 配置
   session:
     # todo 取消注释开启分布式 session（须先配置 Redis）
-    # store-type: redis
+     store-type: none
     # 30 天过期
-    timeout: 2592000
+     timeout: 86400
   # 数据库配置
   # todo 需替换配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/my_db
+    url: jdbc:mysql://localhost:3306/openapi?useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root
     password: 123456
   # Redis 配置
@@ -41,8 +41,8 @@ spring:
       # 大小限制
       max-file-size: 10MB
 server:
-  address: 0.0.0.0
-  port: 8101
+  address: 127.0.0.1
+  port: 8090
   servlet:
     context-path: /api
     # cookie 30 天过期
@@ -87,3 +87,17 @@ cos:
     secretKey: xxx
     region: xxx
     bucket: xxx
+
+openapi:
+  client:
+    access-key: ryan
+    secret-key: 123123123
+
+dubbo:
+  application:
+    name: dubbo-springboot-demo-provider
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    address: nacos://localhost:8848

@@ -6,15 +6,16 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.2</version>
+        <version>2.7.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.yupi</groupId>
-    <artifactId>springboot-init</artifactId>
+    <groupId>com.ryan</groupId>
+    <artifactId>openapi-backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>springboot-init</name>
+    <name>openapi-backend</name>
     <properties>
         <java.version>1.8</java.version>
+        <dubbo.version>3.2.0</dubbo.version>
     </properties>
     <dependencies>
         <dependency>
@@ -120,6 +121,30 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <!--custom sdk-->
+        <dependency>
+            <groupId>com.ryan</groupId>
+            <artifactId>openapi-client-sdk</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+        <!--custom common-->
+        <dependency>
+            <groupId>com.ryan.openapi</groupId>
+            <artifactId>openapi-common</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.dubbo/dubbo -->
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo</artifactId>
+            <version>3.0.9</version>
+        </dependency>
+        <!-- nacos-client -->
+        <dependency>
+            <groupId>com.alibaba.nacos</groupId>
+            <artifactId>nacos-client</artifactId>
+            <version>2.1.0</version>
         </dependency>
     </dependencies>
 
