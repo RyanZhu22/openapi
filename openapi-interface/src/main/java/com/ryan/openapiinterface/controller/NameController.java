@@ -1,13 +1,8 @@
 package com.ryan.openapiinterface.controller;
 
-import cn.hutool.http.server.HttpServerRequest;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.ryan.openapiclientsdk.model.User;
-import com.ryan.openapiclientsdk.utils.SignUtils;
-import com.ryan.openapiinterface.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -18,9 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/name")
 public class NameController {
-
-    @Resource
-    private UserService userService;
 
     @GetMapping("/")
     public String getNameByGet(String name, HttpServletRequest request) {
@@ -63,11 +55,11 @@ public class NameController {
             throw new RuntimeException("Timestamp is more than 5 minutes ahead");
         }
         // TODO 实际情况中是从数据库中查出secretKey
-        com.ryan.openapiinterface.model.User interfaceUser = userService.selectByAccessKey(accessKey);
-        String serverSign = SignUtils.getSign(body, interfaceUser.getSecretKey());
-        if (!sign.equals(serverSign)) {
-            throw new RuntimeException("无权限");
-        }
+//        com.ryan.openapiinterface.model.User interfaceUser = userService.selectByAccessKey(accessKey);
+//        String serverSign = SignUtils.getSign(body, interfaceUser.getSecretKey());
+//        if (!sign.equals(serverSign)) {
+//            throw new RuntimeException("无权限");
+//        }
         // TODO count + 1 after invoking
         String result = "POST 你的名字是" + user.getUsername();
 
