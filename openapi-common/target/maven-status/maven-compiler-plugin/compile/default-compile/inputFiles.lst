@@ -1,13 +1,9 @@
-D:\project-code\openapi\openapi-common\src\main\java\com\ryan\openapi\common\model\entity\Post.java
-D:\project-code\openapi\openapi-common\src\main\java\com\ryan\openapi\common\model\vo\UserVO.java
-D:\project-code\openapi\openapi-common\src\main\java\com\ryan\openapi\common\service\InnerUserService.java
-D:\project-code\openapi\openapi-common\src\main\java\com\ryan\openapi\common\model\entity\PostThumb.java
-D:\project-code\openapi\openapi-common\src\main\java\com\ryan\openapi\common\model\entity\PostFavour.java
 D:\project-code\openapi\openapi-common\src\main\java\com\ryan\openapi\common\model\entity\UserInterfaceInfo.java
 D:\project-code\openapi\openapi-common\src\main\java\com\ryan\openapi\common\model\entity\InterfaceInfo.java
+D:\project-code\openapi\openapi-common\src\main\java\com\ryan\openapi\common\model\vo\UserVO.java
+D:\project-code\openapi\openapi-common\src\main\java\com\ryan\openapi\common\service\InnerUserInterfaceInfoService.java
+D:\project-code\openapi\openapi-common\src\main\java\com\ryan\openapi\common\service\InnerUserService.java
 D:\project-code\openapi\openapi-common\src\main\java\com\ryan\openapi\common\model\enums\UserRoleEnum.java
-D:\project-code\openapi\openapi-common\src\main\java\com\ryan\openapi\common\model\vo\PostVO.java
-D:\project-code\openapi\openapi-common\src\main\java\com\ryan\openapi\common\service\UserInterfaceInfoService.java
 D:\project-code\openapi\openapi-common\src\main\java\com\ryan\openapi\common\model\enums\InterfaceStatusEnum.java
 D:\project-code\openapi\openapi-common\src\main\java\com\ryan\openapi\common\model\entity\User.java
 D:\project-code\openapi\openapi-common\src\main\java\com\ryan\openapi\common\service\InnerInterfaceInfoService.java

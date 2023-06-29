@@ -1,13 +1,12 @@
 package com.ryan.openapi.common.service;
 
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.ryan.openapi.common.model.entity.InterfaceInfo;
 
 /**
 * @author ryan
 */
-public interface InnerInterfaceInfoService extends IService<InterfaceInfo> {
+public interface InnerInterfaceInfoService {
 
 
     /**

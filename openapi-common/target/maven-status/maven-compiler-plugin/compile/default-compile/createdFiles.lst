@@ -1,16 +1,11 @@
 com\ryan\openapi\common\model\enums\FileUploadBizEnum.class
-com\ryan\openapi\common\model\entity\PostFavour.class
 com\ryan\openapi\common\model\entity\User.class
 com\ryan\openapi\common\model\entity\UserInterfaceInfo.class
 com\ryan\openapi\common\model\vo\LoginUserVO.class
 com\ryan\openapi\common\service\InnerInterfaceInfoService.class
-com\ryan\openapi\common\model\vo\PostVO$1.class
-com\ryan\openapi\common\model\vo\PostVO.class
 com\ryan\openapi\common\service\InnerUserInterfaceInfoService.class
 com\ryan\openapi\common\model\entity\InterfaceInfo.class
 com\ryan\openapi\common\model\enums\InterfaceStatusEnum.class
 com\ryan\openapi\common\model\vo\UserVO.class
-com\ryan\openapi\common\model\entity\PostThumb.class
-com\ryan\openapi\common\model\entity\Post.class
 com\ryan\openapi\common\model\enums\UserRoleEnum.class
 com\ryan\openapi\common\service\InnerUserService.class

@@ -1,6 +1,5 @@
 package com.ryan.openapi.common.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.ryan.openapi.common.model.entity.User;
 
 /**
@@ -8,14 +7,13 @@ import com.ryan.openapi.common.model.entity.User;
  *
  * @author ryan
  */
-public interface InnerUserService extends IService<User> {
+public interface InnerUserService {
 
 
     /**
-     * 数据库中查询是否分配给用户密钥（accessKey, secretKey)
+     * 数据库中查询是否分配给用户密钥（accessKey)
      * @param accessKey
-     * @param secretKey
      * @return
      */
-    User getInvokeUser(String accessKey, String secretKey);
+    User getInvokeUser(String accessKey);
 }
