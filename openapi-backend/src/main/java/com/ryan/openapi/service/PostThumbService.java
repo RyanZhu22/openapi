@@ -1,8 +1,8 @@
 package com.ryan.openapi.service;
 
+import com.ryan.openapi.common.model.entity.User;
 import com.ryan.openapi.model.entity.PostThumb;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.ryan.openapi.model.entity.User;
 
 /**
  * 帖子点赞服务

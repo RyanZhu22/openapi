@@ -1,5 +1,6 @@
 package com.ryan.openapi.service;
 
+import com.ryan.openapi.common.service.InnerUserInterfaceInfoService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,7 +12,7 @@ import javax.annotation.Resource;
 class UserInterfaceInfoServiceTest {
 
     @Resource
-    private UserInterfaceInfoService userInterfaceInfoService;
+    private InnerUserInterfaceInfoService userInterfaceInfoService;
 
     @Test
     void invokeCount() {

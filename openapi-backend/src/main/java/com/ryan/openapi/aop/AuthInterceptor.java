@@ -2,8 +2,8 @@ package com.ryan.openapi.aop;
 
 import com.ryan.openapi.annotation.AuthCheck;
 import com.ryan.openapi.common.ErrorCode;
+import com.ryan.openapi.common.model.entity.User;
 import com.ryan.openapi.exception.BusinessException;
-import com.ryan.openapi.model.entity.User;
 import com.ryan.openapi.model.enums.UserRoleEnum;
 import com.ryan.openapi.service.UserService;
 import javax.annotation.Resource;

@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.ryan.openapi.annotation.AuthCheck;
 import com.ryan.openapi.common.*;
 import com.ryan.openapi.common.model.entity.InterfaceInfo;
+import com.ryan.openapi.common.model.entity.User;
 import com.ryan.openapi.common.service.InnerInterfaceInfoService;
 import com.ryan.openapi.constant.CommonConstant;
 import com.ryan.openapi.exception.BusinessException;
@@ -13,8 +14,8 @@ import com.ryan.openapi.model.dto.interfaceinfo.InterfaceInfoAddRequest;
 import com.ryan.openapi.model.dto.interfaceinfo.InterfaceInfoInvokeRequest;
 import com.ryan.openapi.model.dto.interfaceinfo.InterfaceInfoQueryRequest;
 import com.ryan.openapi.model.dto.interfaceinfo.InterfaceInfoUpdateRequest;
-import com.ryan.openapi.model.entity.User;
 import com.ryan.openapi.model.enums.InterfaceStatusEnum;
+import com.ryan.openapi.service.InterfaceInfoService;
 import com.ryan.openapi.service.UserService;
 import com.ryan.openapiclientsdk.client.OpenApiClient;
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +37,7 @@ import java.util.List;
 public class InterfaceInfoController {
 
     @Resource
-    private InnerInterfaceInfoService interfaceInfoService;
+    private InterfaceInfoService interfaceInfoService;
 
     @Resource
     private UserService userService;

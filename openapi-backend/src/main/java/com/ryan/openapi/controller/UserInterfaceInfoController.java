@@ -8,6 +8,7 @@ import com.ryan.openapi.common.BaseResponse;
 import com.ryan.openapi.common.DeleteRequest;
 import com.ryan.openapi.common.ErrorCode;
 import com.ryan.openapi.common.ResultUtils;
+import com.ryan.openapi.common.model.entity.User;
 import com.ryan.openapi.common.model.entity.UserInterfaceInfo;
 import com.ryan.openapi.common.service.InnerUserInterfaceInfoService;
 import com.ryan.openapi.constant.CommonConstant;
@@ -16,7 +17,7 @@ import com.ryan.openapi.exception.BusinessException;
 import com.ryan.openapi.model.dto.interfaceinfo.InterfaceInfoAddRequest;
 import com.ryan.openapi.model.dto.interfaceinfo.InterfaceInfoUpdateRequest;
 import com.ryan.openapi.model.dto.userinterfaceinfo.UserInterfaceInfoQueryRequest;
-import com.ryan.openapi.model.entity.User;
+import com.ryan.openapi.service.UserInterfaceInfoService;
 import com.ryan.openapi.service.UserService;
 import com.ryan.openapiclientsdk.client.OpenApiClient;
 import lombok.extern.slf4j.Slf4j;
@@ -38,7 +39,7 @@ import java.util.List;
 public class UserInterfaceInfoController {
 
     @Resource
-    private InnerUserInterfaceInfoService userInterfaceInfoService;
+    private UserInterfaceInfoService userInterfaceInfoService;
 
     @Resource
     private UserService userService;

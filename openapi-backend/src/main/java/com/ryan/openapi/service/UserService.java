@@ -1,12 +1,11 @@
 package com.ryan.openapi.service;
 
-import cn.hutool.http.server.HttpServerRequest;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.ryan.openapi.common.model.entity.User;
 import com.ryan.openapi.model.vo.LoginUserVO;
 import com.ryan.openapi.model.vo.UserVO;
 import com.ryan.openapi.model.dto.user.UserQueryRequest;
-import com.ryan.openapi.model.entity.User;
 
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;

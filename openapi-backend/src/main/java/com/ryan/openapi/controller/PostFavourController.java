@@ -1,6 +1,7 @@
 package com.ryan.openapi.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.ryan.openapi.common.model.entity.User;
 import com.ryan.openapi.model.vo.PostVO;
 import com.ryan.openapi.common.BaseResponse;
 import com.ryan.openapi.common.ErrorCode;
@@ -11,7 +12,6 @@ import com.ryan.openapi.model.dto.post.PostQueryRequest;
 import com.ryan.openapi.model.dto.postfavour.PostFavourAddRequest;
 import com.ryan.openapi.model.dto.postfavour.PostFavourQueryRequest;
 import com.ryan.openapi.model.entity.Post;
-import com.ryan.openapi.model.entity.User;
 import com.ryan.openapi.service.PostFavourService;
 import com.ryan.openapi.service.PostService;
 import com.ryan.openapi.service.UserService;

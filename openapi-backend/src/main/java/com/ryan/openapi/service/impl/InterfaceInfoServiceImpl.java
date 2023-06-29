@@ -7,17 +7,14 @@ import com.ryan.openapi.common.model.entity.InterfaceInfo;
 import com.ryan.openapi.common.service.InnerInterfaceInfoService;
 import com.ryan.openapi.exception.BusinessException;
 import com.ryan.openapi.mapper.InterfaceInfoMapper;
+import com.ryan.openapi.service.InterfaceInfoService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
-/**
-* @author ryan
-* @description 针对表【interface_info(接口信息)】的数据库操作Service实现
-* @createDate 2023-05-15 20:19:21
-*/
+
 @Service
 public class InterfaceInfoServiceImpl extends ServiceImpl<InterfaceInfoMapper, InterfaceInfo>
-    implements InnerInterfaceInfoService {
+    implements InterfaceInfoService {
 
     @Override
     public void validInterfaceInfo(InterfaceInfo interfaceInfo, boolean add) {
@@ -37,6 +34,7 @@ public class InterfaceInfoServiceImpl extends ServiceImpl<InterfaceInfoMapper, I
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "名称过长");
         }
     }
+
 }
 
 

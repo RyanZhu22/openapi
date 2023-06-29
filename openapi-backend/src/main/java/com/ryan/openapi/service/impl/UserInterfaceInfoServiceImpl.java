@@ -8,6 +8,7 @@ import com.ryan.openapi.common.model.entity.UserInterfaceInfo;
 import com.ryan.openapi.common.service.InnerUserInterfaceInfoService;
 import com.ryan.openapi.exception.BusinessException;
 import com.ryan.openapi.mapper.UserInterfaceInfoMapper;
+import com.ryan.openapi.service.UserInterfaceInfoService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,7 +18,7 @@ import org.springframework.stereotype.Service;
 */
 @Service
 public class UserInterfaceInfoServiceImpl extends ServiceImpl<UserInterfaceInfoMapper, UserInterfaceInfo>
-    implements InnerUserInterfaceInfoService {
+    implements UserInterfaceInfoService {
 
     @Override
     public void validUserInterfaceInfo(UserInterfaceInfo userInterfaceInfo, boolean add) {
