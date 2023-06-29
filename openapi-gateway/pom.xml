@@ -19,6 +19,12 @@
         <dubbo.version>3.2.0</dubbo.version>
     </properties>
     <dependencies>
+        <!--custom common-->
+        <dependency>
+            <groupId>com.ryan.openapi</groupId>
+            <artifactId>openapi-common</artifactId>
+            <version>0.0.1</version>
+        </dependency>
         <dependency>
             <groupId>com.ryan</groupId>
             <artifactId>openapi-client-sdk</artifactId>
