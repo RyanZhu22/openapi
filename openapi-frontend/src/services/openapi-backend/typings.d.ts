@@ -1,115 +1,104 @@
 declare namespace API {
-  type BaseResponseboolean = {
+  type BaseResponseBoolean_ = {
     code?: number;
     data?: boolean;
     message?: string;
   };
 
-  type BaseResponseint = {
+  type BaseResponseInt_ = {
     code?: number;
     data?: number;
     message?: string;
   };
 
-  type BaseResponseInterfaceInfo = {
+  type BaseResponseInterfaceInfo_ = {
     code?: number;
     data?: InterfaceInfo;
     message?: string;
   };
 
-  type BaseResponseListInterfaceInfo = {
+  type BaseResponseListInterfaceInfo_ = {
     code?: number;
     data?: InterfaceInfo[];
     message?: string;
   };
 
-  type BaseResponseListUserInterfaceInfo = {
+  type BaseResponseListUserInterfaceInfo_ = {
     code?: number;
     data?: UserInterfaceInfo[];
     message?: string;
   };
 
-  type BaseResponseLoginUserVO = {
+  type BaseResponseLoginUserVO_ = {
     code?: number;
     data?: LoginUserVO;
     message?: string;
   };
 
-  type BaseResponselong = {
+  type BaseResponseLong_ = {
     code?: number;
     data?: number;
     message?: string;
   };
 
-  type BaseResponseobject = {
+  type BaseResponseObject_ = {
     code?: number;
     data?: Record<string, any>;
     message?: string;
   };
 
-  type BaseResponsePageInterfaceInfo = {
+  type BaseResponsePageInterfaceInfo_ = {
     code?: number;
-    data?: PageInterfaceInfo;
+    data?: PageInterfaceInfo_;
     message?: string;
   };
 
-  type BaseResponsePagePostVO = {
+  type BaseResponsePagePostVO_ = {
     code?: number;
-    data?: PagePostVO;
+    data?: PagePostVO_;
     message?: string;
   };
 
-  type BaseResponsePageUser = {
+  type BaseResponsePageUser_ = {
     code?: number;
-    data?: PageUser;
+    data?: PageUser_;
     message?: string;
   };
 
-  type BaseResponsePageUserInterfaceInfo = {
+  type BaseResponsePageUserInterfaceInfo_ = {
     code?: number;
-    data?: PageUserInterfaceInfo;
+    data?: PageUserInterfaceInfo_;
     message?: string;
   };
 
-  type BaseResponsePageUserVO = {
+  type BaseResponsePageUserVO_ = {
     code?: number;
-    data?: PageUserVO;
+    data?: PageUserVO_;
     message?: string;
   };
 
-  type BaseResponsestring = {
+  type BaseResponseString_ = {
     code?: number;
     data?: string;
     message?: string;
   };
 
-  type BaseResponseUser = {
+  type BaseResponseUser_ = {
     code?: number;
     data?: User;
     message?: string;
   };
 
-  type BaseResponseUserInterfaceInfo = {
+  type BaseResponseUserInterfaceInfo_ = {
     code?: number;
     data?: UserInterfaceInfo;
     message?: string;
   };
 
-  type BaseResponseUserVO = {
+  type BaseResponseUserVO_ = {
     code?: number;
     data?: UserVO;
     message?: string;
-  };
-
-  type checkUsingGETParams = {
-    /** timestamp */
-    timestamp?: string;
-    /** nonce */
-    nonce?: string;
-    /** signature */
-    signature?: string;
-    /** echostr */
-    echostr?: string;
   };
 
   type DeleteRequest = {
@@ -255,7 +244,7 @@ declare namespace API {
     column?: string;
   };
 
-  type PageInterfaceInfo = {
+  type PageInterfaceInfo_ = {
     countId?: string;
     current?: number;
     maxLimit?: number;
@@ -268,7 +257,7 @@ declare namespace API {
     total?: number;
   };
 
-  type PagePostVO = {
+  type PagePostVO_ = {
     countId?: string;
     current?: number;
     maxLimit?: number;
@@ -281,7 +270,7 @@ declare namespace API {
     total?: number;
   };
 
-  type PageUser = {
+  type PageUser_ = {
     countId?: string;
     current?: number;
     maxLimit?: number;
@@ -294,7 +283,7 @@ declare namespace API {
     total?: number;
   };
 
-  type PageUserInterfaceInfo = {
+  type PageUserInterfaceInfo_ = {
     countId?: string;
     current?: number;
     maxLimit?: number;
@@ -307,7 +296,7 @@ declare namespace API {
     total?: number;
   };
 
-  type PageUserVO = {
+  type PageUserVO_ = {
     countId?: string;
     current?: number;
     maxLimit?: number;
@@ -406,11 +395,6 @@ declare namespace API {
     totalNum?: number;
     updateTime?: string;
     userId?: number;
-  };
-
-  type userLoginByWxOpenUsingGETParams = {
-    /** code */
-    code: string;
   };
 
   type UserLoginRequest = {
