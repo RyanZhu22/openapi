@@ -1,5 +1,5 @@
 server:
-  port: 8091
+  port: 8090
 
 spring:
   cloud:
@@ -9,11 +9,13 @@ spring:
           uri: http://localhost:8123
           predicates:
             - Path=/api/**
-          filters:
-            - AddRequestHeader=ryan, swag
-            - AddRequestParameter=name, dog
-      default-filters:
-        - AddResponseHeader=source, ryan
+#          filters:
+#            - AddRequestHeader=ryan, swag
+#            - AddRequestParameter=name, dog
+#      default-filters:
+#        - AddResponseHeader=source, ryan
+  main:
+    web-application-type: reactive
 
 
 dubbo:

@@ -1,6 +1,14 @@
 package com.ryan.openapi;
 
+import cn.hutool.crypto.SignUtil;
+import com.ryan.openapi.common.model.entity.InterfaceInfo;
+import com.ryan.openapi.common.model.entity.User;
+import com.ryan.openapi.common.service.InnerInterfaceInfoService;
+import com.ryan.openapi.common.service.InnerUserInterfaceInfoService;
+import com.ryan.openapi.common.service.InnerUserService;
+import com.ryan.openapiclientsdk.utils.SignUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.reactivestreams.Publisher;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -27,7 +35,18 @@ import java.util.List;
 @Component
 public class CustomGlobalFilter implements GlobalFilter, Ordered {
 
+    @DubboReference
+    private InnerUserService innerUserService;
+
+    @DubboReference
+    private InnerInterfaceInfoService innerInterfaceInfoService;
+
+    @DubboReference
+    private InnerUserInterfaceInfoService innerUserInterfaceInfoService;
+
     private static final List<String> IP_WHITE_LIST = Arrays.asList("127.0.0.1");
+
+    private static final String INTERFACE_HOST = "http://localhost:8123";
 
 
     /**
@@ -41,9 +60,11 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 //        1. 请求日志
         ServerHttpRequest request = exchange.getRequest();
+        String path = INTERFACE_HOST + request.getPath().value();
+        String method = request.getMethod().toString();
         log.info("unique flag in request: " + request.getId());
-        log.info("path in request: " + request.getPath().value());
-        log.info("method in request: " + request.getMethod());
+        log.info("path in request: " + path);
+        log.info("method in request: " + method);
         log.info("params in request: " + request.getQueryParams());
         String sourceAddress = request.getLocalAddress().getHostString();
         log.info("source path in request: " + sourceAddress);
@@ -61,12 +82,16 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
         String timestamp = headers.getFirst("timestamp");
         String sign = headers.getFirst("sign");
         String body = headers.getFirst("body");
-
-        // TODO 实际情况从数据库中查是否已分配给用户
-        if (!"ryan".equals(accessKey)) {
+        // TODO 实际情况中是从数据库中查询是否分配给用户
+        User invokeUser = null;
+        try {
+            invokeUser = innerUserService.getInvokeUser(accessKey);
+        } catch (Exception e) {
+            log.error("getInvokeUser error", e);
+        }
+        if (invokeUser == null) {
             return handleNoAuth(response);
         }
-        // TODO 这个出错
         if (Long.parseLong(nonce) > 10000) {
             return handleNoAuth(response);
         }
@@ -77,32 +102,30 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
             return handleNoAuth(response);
         }
         // TODO 实际情况中是从数据库中查出secretKey
-//        User user = userService.selectByAccessKey(accessKey);
-//        String serverSign = SignUtils.getSign(body, user.getSecretKey());
-//        if (!sign.equals(serverSign)) {
-//            throw new RuntimeException("无权限");
-//        }
-
+        String secretKey = invokeUser.getSecretKey();
+        String serverSign = SignUtils.getSign(body, secretKey);
+        if (sign == null || !sign.equals(serverSign)) {
+            return handleNoAuth(response);
+        }
 //        4. 请求模拟接口是否存在
         // TODO 从数据库中查询模拟接口是否存在，以及存请求方法是否匹配，(还可以校验请求参数）
-//        5. 请求转发，调用模拟接口
+        InterfaceInfo interfaceInfo = null;
+        try {
+            interfaceInfo = innerInterfaceInfoService.getInterfaceInfo(path, method);
+        } catch (Exception e) {
+            log.error("getInterfaceInfo error", e);
+        }
+        if (interfaceInfo == null) {
+            return handleNoAuth(response);
+        }
+//        5. 请求转发，调用模拟接口 + 响应日志
 //        Mono<Void> filter = chain.filter(exchange);
-        return handleResponse(exchange, chain);
-//        6. 响应日志
-//        log.info("Response: " + response.getStatusCode());
-////
-//        if (response.getStatusCode() == HttpStatus.OK) {
-//
-//        }
-////        9. 调用失败，返回一个规范的错误码
-//        if (response.getStatusCode() != HttpStatus.OK) {
-//            return handleInvokeError(response);
-//        }
-//        log.info("custom global filter");
-//        return filter;
+        // return filter;
+        return handleResponse(exchange, chain, interfaceInfo.getId(), invokeUser.getId());
+
     }
 
-    public Mono<Void> handleResponse(ServerWebExchange exchange, GatewayFilterChain chain) {
+    public Mono<Void> handleResponse(ServerWebExchange exchange, GatewayFilterChain chain, long interfaceInfoId, long userId) {
         try {
 
             ServerHttpResponse originalResponse = exchange.getResponse();
@@ -122,8 +145,13 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
                             // 返回值写数据
                             // 拼接字符串
                             return super.writeWith(
-                                // 7. TODO 调用成功，接口调用次数+1 + 1 invokeCount
                                 fluxBody.map(dataBuffer -> {
+                                    // 7. TODO 调用成功，接口调用次数+1 + 1 invokeCount
+                                    try {
+                                        innerUserInterfaceInfoService.invokeCount(interfaceInfoId, userId);
+                                    } catch (Exception e) {
+                                        log.error("invokeCount error", e);
+                                    }
                                     byte[] content = new byte[dataBuffer.readableByteCount()];
                                     dataBuffer.read(content);
                                     DataBufferUtils.release(dataBuffer);//释放掉内存
@@ -141,13 +169,10 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
                                 }));
                         } else {
                             log.error("<--- {} 响应code异常", getStatusCode());
-                        }
-                        return super.writeWith(body);
+                        } return super.writeWith(body);
                     }
-                };
-                return chain.filter(exchange.mutate().response(decoratedResponse).build());
-            }
-            return chain.filter(exchange);//降级处理返回数据
+                }; return chain.filter(exchange.mutate().response(decoratedResponse).build());
+            } return chain.filter(exchange);//降级处理返回数据
         } catch (Exception e) {
             log.error("gateway log exception.\n" + e);
             return chain.filter(exchange);
