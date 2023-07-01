@@ -21,4 +21,9 @@
         totalNum,leftNum,status,
         createTime,updateTime,isDelete
     </sql>
+
+    <select id="getTopInvokeInterfaceInfo" resultType="com.ryan.openapi.common.model.entity.UserInterfaceInfo">
+        select interfaceInfoId, sum(totalNum) as totalNum from user_interface_info group by interfaceinfoId
+        order by totalNum desc limit #{limit}
+    </select>
 </mapper>
