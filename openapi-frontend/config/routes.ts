@@ -52,6 +52,12 @@ export default [
         path: '/admin/interface_info',
         component: './Admin/InterfaceInfo',
       },
+      {
+        name: 'interface-analysis',
+        icon: 'table',
+        path: '/admin/interface_analysis',
+        component: './Admin/InterfaceAnalysis',
+      },
     ],
   },
   {

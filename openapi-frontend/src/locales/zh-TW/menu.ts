@@ -4,6 +4,7 @@ export default {
   'menu.home': '首頁',
   'menu.admin': '权限',
   'menu.admin.interface-manage': '接口管理',
+  'menu.admin.interface-analysis': '接口分析',
   'menu.admin.sub-page': '二级管理页',
   'menu.login': '登錄',
   'menu.register': '註冊',
