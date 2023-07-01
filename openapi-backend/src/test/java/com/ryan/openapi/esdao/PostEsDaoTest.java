@@ -2,8 +2,7 @@ package com.ryan.openapi.esdao;
 
 import com.ryan.openapi.model.dto.post.PostEsDTO;
 import com.ryan.openapi.model.dto.post.PostQueryRequest;
-import com.ryan.openapi.model.entity.Post;
-import com.ryan.openapi.service.PostService;
+
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
