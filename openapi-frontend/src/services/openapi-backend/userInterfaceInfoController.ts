@@ -7,7 +7,7 @@ export async function addInterfaceInfoUsingPOST1(
   body: API.InterfaceInfoAddRequest,
   options?: { [key: string]: any },
 ) {
-  return request<API.BaseResponseLong_>('/api/userInterfaceInfo/add', {
+  return request<API.BaseResponselong>('/api/userInterfaceInfo/add', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ export async function deleteInterfaceInfoUsingPOST1(
   body: API.DeleteRequest,
   options?: { [key: string]: any },
 ) {
-  return request<API.BaseResponseBoolean_>('/api/userInterfaceInfo/delete', {
+  return request<API.BaseResponseboolean>('/api/userInterfaceInfo/delete', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ export async function getInterfaceInfoByIdUsingGET1(
   params: API.getInterfaceInfoByIdUsingGET1Params,
   options?: { [key: string]: any },
 ) {
-  return request<API.BaseResponseUserInterfaceInfo_>('/api/userInterfaceInfo/get', {
+  return request<API.BaseResponseUserInterfaceInfo>('/api/userInterfaceInfo/get', {
     method: 'GET',
     params: {
       ...params,
@@ -53,7 +53,7 @@ export async function listInterfaceInfoUsingGET1(
   params: API.listInterfaceInfoUsingGET1Params,
   options?: { [key: string]: any },
 ) {
-  return request<API.BaseResponseListUserInterfaceInfo_>('/api/userInterfaceInfo/list', {
+  return request<API.BaseResponseListUserInterfaceInfo>('/api/userInterfaceInfo/list', {
     method: 'GET',
     params: {
       ...params,
@@ -68,7 +68,7 @@ export async function listInterfaceInfoByPageUsingGET1(
   params: API.listInterfaceInfoByPageUsingGET1Params,
   options?: { [key: string]: any },
 ) {
-  return request<API.BaseResponsePageUserInterfaceInfo_>('/api/userInterfaceInfo/list/page', {
+  return request<API.BaseResponsePageUserInterfaceInfo>('/api/userInterfaceInfo/list/page', {
     method: 'GET',
     params: {
       ...params,
@@ -82,7 +82,7 @@ export async function updateInterfaceInfoUsingPOST1(
   body: API.InterfaceInfoUpdateRequest,
   options?: { [key: string]: any },
 ) {
-  return request<API.BaseResponseBoolean_>('/api/userInterfaceInfo/update', {
+  return request<API.BaseResponseboolean>('/api/userInterfaceInfo/update', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

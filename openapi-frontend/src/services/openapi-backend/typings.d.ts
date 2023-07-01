@@ -1,101 +1,107 @@
 declare namespace API {
-  type BaseResponseBoolean_ = {
+  type BaseResponseboolean = {
     code?: number;
     data?: boolean;
     message?: string;
   };
 
-  type BaseResponseInt_ = {
+  type BaseResponseint = {
     code?: number;
     data?: number;
     message?: string;
   };
 
-  type BaseResponseInterfaceInfo_ = {
+  type BaseResponseInterfaceInfo = {
     code?: number;
     data?: InterfaceInfo;
     message?: string;
   };
 
-  type BaseResponseListInterfaceInfo_ = {
+  type BaseResponseListInterfaceInfo = {
     code?: number;
     data?: InterfaceInfo[];
     message?: string;
   };
 
-  type BaseResponseListUserInterfaceInfo_ = {
+  type BaseResponseListInterfaceInfoVO = {
+    code?: number;
+    data?: InterfaceInfoVO[];
+    message?: string;
+  };
+
+  type BaseResponseListUserInterfaceInfo = {
     code?: number;
     data?: UserInterfaceInfo[];
     message?: string;
   };
 
-  type BaseResponseLoginUserVO_ = {
+  type BaseResponseLoginUserVO = {
     code?: number;
     data?: LoginUserVO;
     message?: string;
   };
 
-  type BaseResponseLong_ = {
+  type BaseResponselong = {
     code?: number;
     data?: number;
     message?: string;
   };
 
-  type BaseResponseObject_ = {
+  type BaseResponseobject = {
     code?: number;
     data?: Record<string, any>;
     message?: string;
   };
 
-  type BaseResponsePageInterfaceInfo_ = {
+  type BaseResponsePageInterfaceInfo = {
     code?: number;
-    data?: PageInterfaceInfo_;
+    data?: PageInterfaceInfo;
     message?: string;
   };
 
-  type BaseResponsePagePostVO_ = {
+  type BaseResponsePagePostVO = {
     code?: number;
-    data?: PagePostVO_;
+    data?: PagePostVO;
     message?: string;
   };
 
-  type BaseResponsePageUser_ = {
+  type BaseResponsePageUser = {
     code?: number;
-    data?: PageUser_;
+    data?: PageUser;
     message?: string;
   };
 
-  type BaseResponsePageUserInterfaceInfo_ = {
+  type BaseResponsePageUserInterfaceInfo = {
     code?: number;
-    data?: PageUserInterfaceInfo_;
+    data?: PageUserInterfaceInfo;
     message?: string;
   };
 
-  type BaseResponsePageUserVO_ = {
+  type BaseResponsePageUserVO = {
     code?: number;
-    data?: PageUserVO_;
+    data?: PageUserVO;
     message?: string;
   };
 
-  type BaseResponseString_ = {
+  type BaseResponsestring = {
     code?: number;
     data?: string;
     message?: string;
   };
 
-  type BaseResponseUser_ = {
+  type BaseResponseUser = {
     code?: number;
     data?: User;
     message?: string;
   };
 
-  type BaseResponseUserInterfaceInfo_ = {
+  type BaseResponseUserInterfaceInfo = {
     code?: number;
     data?: UserInterfaceInfo;
     message?: string;
   };
 
-  type BaseResponseUserVO_ = {
+  type BaseResponseUserVO = {
     code?: number;
     data?: UserVO;
     message?: string;
@@ -173,6 +179,11 @@ declare namespace API {
     url?: string;
   };
 
+  type InterfaceInfoVO = {
+    name?: string;
+    totalNum?: number;
+  };
+
   type listInterfaceInfoByPageUsingGET1Params = {
     current?: number;
     id?: number;
@@ -244,7 +255,7 @@ declare namespace API {
     column?: string;
   };
 
-  type PageInterfaceInfo_ = {
+  type PageInterfaceInfo = {
     countId?: string;
     current?: number;
     maxLimit?: number;
@@ -257,7 +268,7 @@ declare namespace API {
     total?: number;
   };
 
-  type PagePostVO_ = {
+  type PagePostVO = {
     countId?: string;
     current?: number;
     maxLimit?: number;
@@ -270,7 +281,7 @@ declare namespace API {
     total?: number;
   };
 
-  type PageUser_ = {
+  type PageUser = {
     countId?: string;
     current?: number;
     maxLimit?: number;
@@ -283,7 +294,7 @@ declare namespace API {
     total?: number;
   };
 
-  type PageUserInterfaceInfo_ = {
+  type PageUserInterfaceInfo = {
     countId?: string;
     current?: number;
     maxLimit?: number;
@@ -296,7 +307,7 @@ declare namespace API {
     total?: number;
   };
 
-  type PageUserVO_ = {
+  type PageUserVO = {
     countId?: string;
     current?: number;
     maxLimit?: number;
