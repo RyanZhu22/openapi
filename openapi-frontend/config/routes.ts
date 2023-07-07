@@ -34,12 +34,6 @@ export default [
       },
     ],
   },
-  // {
-  //   path: '/welcome',
-  //   name: 'welcome',
-  //   icon: 'smile',
-  //   component: './Index',
-  // },
   {
     path: '/admin',
     name: 'admin',

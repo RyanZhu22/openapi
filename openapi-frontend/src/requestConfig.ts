@@ -25,8 +25,8 @@ interface ResponseStructure {
  * @doc https://umijs.org/docs/max/request#配置
  */
 export const requestConfig: RequestConfig = {
-  baseURL: "http://localhost:8080",
-  withCredentials: true, // 携带cookie
+  baseURL: process.env.NODE_ENV === "production" ? "http://openapi.code-nav.cn" : undefined,
+  withopen: true, // 携带cookie
 
   // 请求拦截器
   requestInterceptors: [
