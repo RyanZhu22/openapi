@@ -27,49 +27,46 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
-/**
- * 用户服务实现
- *
- */
+
 @Service
 @Slf4j
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
     /**
-     * 盐值，混淆密码
+     * salt, obfuscated password
      */
     private static final String SALT = "ryan";
 
     @Override
     public long userRegister(String userAccount, String userPassword, String checkPassword) {
-        // 1. 校验
+        // 1. validation
         if (StringUtils.isAnyBlank(userAccount, userPassword, checkPassword)) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "参数为空");
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "The parameter is empty");
         }
         if (userAccount.length() < 4) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户账号过短");
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "The user account too short");
         }
         if (userPassword.length() < 8 || checkPassword.length() < 8) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户密码过短");
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "The user password is too short");
         }
-        // 密码和校验密码相同
+        // The password is the same as the validation password
         if (!userPassword.equals(checkPassword)) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "两次输入的密码不一致");
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "The two entered passwords do not match");
         }
         synchronized (userAccount.intern()) {
-            // 账户不能重复
+            // user account cannot be repeated
             QueryWrapper<User> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("userAccount", userAccount);
             long count = this.baseMapper.selectCount(queryWrapper);
             if (count > 0) {
-                throw new BusinessException(ErrorCode.PARAMS_ERROR, "账号重复");
+                throw new BusinessException(ErrorCode.PARAMS_ERROR, "Duplicate account");
             }
-            // 2. 加密
+            // 2. encrypt
             String encryptPassword = DigestUtils.md5DigestAsHex((SALT + userPassword).getBytes());
-            // 3. 分配accessKey, secretKey
+            // 3. assign accessKey, secretKey
             String accessKey = DigestUtil.md5Hex(SALT + userAccount + RandomUtil.randomNumbers(5));
             String secretKey = DigestUtil.md5Hex(SALT + userAccount + RandomUtil.randomNumbers(8));
-            // 4. 插入数据
+            // 4. insert data
             User user = new User();
             user.setUserAccount(userAccount);
             user.setUserPassword(encryptPassword);
@@ -77,7 +74,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             user.setSecretKey(secretKey);
             boolean saveResult = this.save(user);
             if (!saveResult) {
-                throw new BusinessException(ErrorCode.SYSTEM_ERROR, "注册失败，数据库错误");
+                throw new BusinessException(ErrorCode.SYSTEM_ERROR, "Registration failed, database error");
             }
             return user.getId();
         }
@@ -85,49 +82,49 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public LoginUserVO userLogin(String userAccount, String userPassword, HttpServletRequest request) {
-        // 1. 校验
+        // 1. validation
         if (StringUtils.isAnyBlank(userAccount, userPassword)) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "参数为空");
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "The parameter is empty");
         }
         if (userAccount.length() < 4) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "账号错误");
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "The account error");
         }
         if (userPassword.length() < 8) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "密码错误");
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "The password error");
         }
-        // 2. 加密
+        // 2. encrypt
         String encryptPassword = DigestUtils.md5DigestAsHex((SALT + userPassword).getBytes());
-        // 查询用户是否存在
+        // check if the user exists
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("userAccount", userAccount);
         queryWrapper.eq("userPassword", encryptPassword);
         User user = this.baseMapper.selectOne(queryWrapper);
-        // 用户不存在
+        // user do not exist
         if (user == null) {
             log.info("user login failed, userAccount cannot match userPassword");
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户不存在或密码错误");
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "The user does not exist or password is wrong");
         }
-        // 3. 记录用户的登录态
+        // 3. record the user's login status
         request.getSession().setAttribute(UserConstant.USER_LOGIN_STATE, user);
         return this.getLoginUserVO(user);
     }
 
 
     /**
-     * 获取当前登录用户
+     * get the currently logged-in user
      *
      * @param request
      * @return
      */
     @Override
     public User getLoginUser(HttpServletRequest request) {
-        // 先判断是否已登录
+        // check if the user logged
         Object userObj = request.getSession().getAttribute(UserConstant.USER_LOGIN_STATE);
         User currentUser = (User) userObj;
         if (currentUser == null || currentUser.getId() == null) {
             throw new BusinessException(ErrorCode.NOT_LOGIN_ERROR);
         }
-        // 从数据库查询（追求性能的话可以注释，直接走缓存）
+        // query from database
         long userId = currentUser.getId();
         currentUser = this.getById(userId);
         if (currentUser == null) {
@@ -137,33 +134,33 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     /**
-     * 获取当前登录用户（允许未登录）
+     * get the currently logged in user（allow not logged）
      *
      * @param request
      * @return
      */
     @Override
     public User getLoginUserPermitNull(HttpServletRequest request) {
-        // 先判断是否已登录
+        // check if the user logged
         Object userObj = request.getSession().getAttribute(UserConstant.USER_LOGIN_STATE);
         User currentUser = (User) userObj;
         if (currentUser == null || currentUser.getId() == null) {
             return null;
         }
-        // 从数据库查询（追求性能的话可以注释，直接走缓存）
+        // query from database
         long userId = currentUser.getId();
         return this.getById(userId);
     }
 
     /**
-     * 是否为管理员
+     * check if the user is admin
      *
      * @param request
      * @return
      */
     @Override
     public boolean isAdmin(HttpServletRequest request) {
-        // 仅管理员可查询
+        // only admin can query
         Object userObj = request.getSession().getAttribute(UserConstant.USER_LOGIN_STATE);
         User user = (User) userObj;
         return isAdmin(user);
@@ -175,16 +172,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     /**
-     * 用户注销
+     * user logout
      *
      * @param request
      */
     @Override
     public boolean userLogout(HttpServletRequest request) {
         if (request.getSession().getAttribute(UserConstant.USER_LOGIN_STATE) == null) {
-            throw new BusinessException(ErrorCode.OPERATION_ERROR, "未登录");
+            throw new BusinessException(ErrorCode.OPERATION_ERROR, "not logged in");
         }
-        // 移除登录态
+        // remove login status
         request.getSession().removeAttribute(UserConstant.USER_LOGIN_STATE);
         return true;
     }
@@ -220,7 +217,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public QueryWrapper<User> getQueryWrapper(UserQueryRequest userQueryRequest) {
         if (userQueryRequest == null) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "请求参数为空");
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "The request parameter is empty");
         }
         Long id = userQueryRequest.getId();
         String unionId = userQueryRequest.getUnionId();

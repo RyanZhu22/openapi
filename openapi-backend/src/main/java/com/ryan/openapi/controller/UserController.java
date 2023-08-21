@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * 用户接口
+ * User interface
  *
  */
 @RestController
@@ -35,13 +35,10 @@ public class UserController {
     @Resource
     private UserService userService;
 
-//    @Resource
-//    private WxOpenConfig wxOpenConfig;
-
-    // region 登录相关
+    // region for user login
 
     /**
-     * 用户注册
+     * user register
      *
      * @param userRegisterRequest
      * @return
@@ -62,7 +59,7 @@ public class UserController {
     }
 
     /**
-     * 用户登录
+     * user login
      *
      * @param userLoginRequest
      * @param request
@@ -82,31 +79,8 @@ public class UserController {
         return ResultUtils.success(loginUserVO);
     }
 
-//    /**
-//     * 用户登录（微信开放平台）
-//     */
-//    @GetMapping("/login/wx_open")
-//    public BaseResponse<LoginUserVO> userLoginByWxOpen(HttpServletRequest request, HttpServletResponse response,
-//            @RequestParam("code") String code) {
-//        WxOAuth2AccessToken accessToken;
-//        try {
-//            WxMpService wxService = wxOpenConfig.getWxMpService();
-//            accessToken = wxService.getOAuth2Service().getAccessToken(code);
-//            WxOAuth2UserInfo userInfo = wxService.getOAuth2Service().getUserInfo(accessToken, code);
-//            String unionId = userInfo.getUnionId();
-//            String mpOpenId = userInfo.getOpenid();
-//            if (StringUtils.isAnyBlank(unionId, mpOpenId)) {
-//                throw new BusinessException(ErrorCode.SYSTEM_ERROR, "登录失败，系统错误");
-//            }
-//            return ResultUtils.success(userService.userLoginByMpOpen(userInfo, request));
-//        } catch (Exception e) {
-//            log.error("userLoginByWxOpen error", e);
-//            throw new BusinessException(ErrorCode.SYSTEM_ERROR, "登录失败，系统错误");
-//        }
-//    }
-
     /**
-     * 用户注销
+     * user logout
      *
      * @param request
      * @return
@@ -121,7 +95,7 @@ public class UserController {
     }
 
     /**
-     * 获取当前登录用户
+     * get the currently logged-in user
      *
      * @param request
      * @return
@@ -134,10 +108,10 @@ public class UserController {
 
     // endregion
 
-    // region 增删改查
+    // region for CRUD
 
     /**
-     * 创建用户
+     * create user
      *
      * @param userAddRequest
      * @param request
@@ -157,7 +131,7 @@ public class UserController {
     }
 
     /**
-     * 删除用户
+     * delete user
      *
      * @param deleteRequest
      * @param request
@@ -174,7 +148,7 @@ public class UserController {
     }
 
     /**
-     * 更新用户
+     * udpate user
      *
      * @param userUpdateRequest
      * @param request
@@ -195,7 +169,7 @@ public class UserController {
     }
 
     /**
-     * 根据 id 获取用户（仅管理员）
+     * get user information by id (only admin)
      *
      * @param id
      * @param request
@@ -213,7 +187,7 @@ public class UserController {
     }
 
     /**
-     * 根据 id 获取包装类
+     * get user vo information by id
      *
      * @param id
      * @param request
@@ -227,7 +201,7 @@ public class UserController {
     }
 
     /**
-     * 分页获取用户列表（仅管理员）
+     * get user list by pagination (only admin)
      *
      * @param userQueryRequest
      * @param request
@@ -245,7 +219,7 @@ public class UserController {
     }
 
     /**
-     * 分页获取用户封装列表
+     * get user vo list by pagination
      *
      * @param userQueryRequest
      * @param request
@@ -259,7 +233,7 @@ public class UserController {
         }
         long current = userQueryRequest.getCurrent();
         long size = userQueryRequest.getPageSize();
-        // 限制爬虫
+        // restriction of crawlers
         ThrowUtils.throwIf(size > 20, ErrorCode.PARAMS_ERROR);
         Page<User> userPage = userService.page(new Page<>(current, size),
                 userService.getQueryWrapper(userQueryRequest));
@@ -272,7 +246,7 @@ public class UserController {
     // endregion
 
     /**
-     * 更新个人信息
+     * update personal information
      *
      * @param userUpdateMyRequest
      * @param request

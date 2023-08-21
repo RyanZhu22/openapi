@@ -7,62 +7,60 @@ import lombok.EqualsAndHashCode;
 import java.io.Serializable;
 
 /**
- * 查询请求
+ * query request
  *
- * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
- * @from <a href="https://yupi.icu">编程导航知识星球</a>
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class InterfaceInfoQueryRequest extends PageRequest implements Serializable {
 
     /**
-     * 主键
+     * primary key
      */
     private Long id;
 
     /**
-     * 名称
+     * name
      */
     private String name;
 
     /**
-     * 描述
+     * description
      */
     private String description;
 
     /**
-     * 接口地址
+     * interface path
      */
     private String url;
 
     /**
-     * 请求参数
+     * request parameters
      */
     private String requestParams;
 
     /**
-     * 请求头
+     * request header
      */
     private String requestHeader;
 
     /**
-     * 响应头
+     * request header
      */
     private String responseHeader;
 
     /**
-     * 接口状态（0-关闭，1-开启）
+     * interface status（0-off，1-on）
      */
     private Integer status;
 
     /**
-     * 请求类型
+     * request type
      */
     private String method;
 
     /**
-     * 创建人
+     * creator
      */
     private Long userId;
 

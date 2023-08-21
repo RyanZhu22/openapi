@@ -5,14 +5,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * 接口信息枚举
+ * enum of interface information
  *
  * @author ryan
  */
 public enum InterfaceStatusEnum {
 
-    OFFLINE("下线", 0),
-    ONLINE("上线", 1);
+    OFFLINE("offline", 0),
+    ONLINE("online", 1);
 
     private final String text;
 
@@ -24,7 +24,7 @@ public enum InterfaceStatusEnum {
     }
 
     /**
-     * 获取值列表
+     * get values
      *
      * @return
      */

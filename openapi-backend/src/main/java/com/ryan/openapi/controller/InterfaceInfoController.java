@@ -29,7 +29,7 @@ import java.util.List;
 
 
 /**
- * 接口信息接口
+ * Interface Information Controller
  */
 @RestController
 @RequestMapping("/interfaceInfo")
@@ -47,10 +47,10 @@ public class InterfaceInfoController {
 
     private final static Gson GSON = new Gson();
 
-    // region 增删改查
+    // region CRUD
 
     /**
-     * 创建
+     * create
      *
      * @param interfaceInfoAddRequest
      * @param request
@@ -63,7 +63,7 @@ public class InterfaceInfoController {
         }
         InterfaceInfo interfaceInfo = new InterfaceInfo();
         BeanUtils.copyProperties(interfaceInfoAddRequest, interfaceInfo);
-        // 校验
+        // validation
         interfaceInfoService.validInterfaceInfo(interfaceInfo, true);
         User loginUser = userService.getLoginUser(request);
         interfaceInfo.setUserId(loginUser.getId());
@@ -76,7 +76,7 @@ public class InterfaceInfoController {
     }
 
     /**
-     * 删除
+     * delete
      *
      * @param deleteRequest
      * @param request
@@ -89,12 +89,12 @@ public class InterfaceInfoController {
         }
         User user = userService.getLoginUser(request);
         long id = deleteRequest.getId();
-        // 判断是否存在
+        // check if it exists
         InterfaceInfo oldInterfaceInfo = interfaceInfoService.getById(id);
         if (oldInterfaceInfo == null) {
             throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
         }
-        // 仅本人或管理员可删除
+        // only the user or administrator can delete
         if (!oldInterfaceInfo.getUserId().equals(user.getId()) && !userService.isAdmin(request)) {
             throw new BusinessException(ErrorCode.NO_AUTH_ERROR);
         }
@@ -103,7 +103,7 @@ public class InterfaceInfoController {
     }
 
     /**
-     * 更新
+     * update
      *
      * @param interfaceInfoUpdateRequest
      * @param request
@@ -117,16 +117,16 @@ public class InterfaceInfoController {
         }
         InterfaceInfo interfaceInfo = new InterfaceInfo();
         BeanUtils.copyProperties(interfaceInfoUpdateRequest, interfaceInfo);
-        // 参数校验
+        // parameter validation
         interfaceInfoService.validInterfaceInfo(interfaceInfo, false);
         User user = userService.getLoginUser(request);
         long id = interfaceInfoUpdateRequest.getId();
-        // 判断是否存在
+        // check if it exists
         InterfaceInfo oldInterfaceInfo = interfaceInfoService.getById(id);
         if (oldInterfaceInfo == null) {
             throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
         }
-        // 仅本人或管理员可修改
+        // only the user or administrator can update
         if (!oldInterfaceInfo.getUserId().equals(user.getId()) && !userService.isAdmin(request)) {
             throw new BusinessException(ErrorCode.NO_AUTH_ERROR);
         }
@@ -135,7 +135,7 @@ public class InterfaceInfoController {
     }
 
     /**
-     * 根据 id 获取
+     * get by id
      *
      * @param id
      * @return
@@ -150,7 +150,7 @@ public class InterfaceInfoController {
     }
 
     /**
-     * 获取列表（仅管理员可使用）
+     * get list (only admin)
      *
      * @param interfaceInfoQueryRequest
      * @return
@@ -168,7 +168,7 @@ public class InterfaceInfoController {
     }
 
     /**
-     * 分页获取列表
+     * get list by pagination
      *
      * @param interfaceInfoQueryRequest
      * @param request
@@ -186,9 +186,9 @@ public class InterfaceInfoController {
         String sortField = interfaceInfoQueryRequest.getSortField();
         String sortOrder = interfaceInfoQueryRequest.getSortOrder();
         String description = interfaceInfoQuery.getDescription();
-        // description 需支持模糊搜索
+        // support fuzzy search
         interfaceInfoQuery.setDescription(null);
-        // 限制爬虫
+        // limit of crawlers
         if (size > 50) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
@@ -202,7 +202,7 @@ public class InterfaceInfoController {
 
 
     /**
-     * 发布
+     * online
      *
      * @param idRequest
      * @param request
@@ -217,19 +217,19 @@ public class InterfaceInfoController {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         Long id = idRequest.getId();
-        // 判斷接口是否存在
+        // check if the interface exists
         InterfaceInfo oldInterfaceInfo = interfaceInfoService.getById(id);
         if (oldInterfaceInfo == null) {
             throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
         }
-        // 判斷接口是否调用
+        // check if the interface is invoked
         com.ryan.openapiclientsdk.model.User user = new com.ryan.openapiclientsdk.model.User();
         user.setUsername("test");
         String username = openApiClient.getUsernameByPost(user);
         if (StringUtils.isBlank(username)) {
             throw new BusinessException(ErrorCode.SYSTEM_ERROR, "接口验证失败");
         }
-        // 仅本人或管理员可修改
+        // only the user and admin can update
         InterfaceInfo interfaceInfo = new InterfaceInfo();
         interfaceInfo.setId(id);
         interfaceInfo.setStatus(InterfaceStatusEnum.ONLINE.getValue());
@@ -238,7 +238,7 @@ public class InterfaceInfoController {
     }
 
     /**
-     * 下线
+     * offline
      *
      * @param idRequest
      * @param request
@@ -252,13 +252,13 @@ public class InterfaceInfoController {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         Long id = idRequest.getId();
-        // 判斷接口是否存在
+        // check if the interface exists
         InterfaceInfo oldInterfaceInfo = interfaceInfoService.getById(id);
         if (oldInterfaceInfo == null) {
             throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
         }
 
-        // 仅本人或管理员可修改
+        // only the user and admin can update
         InterfaceInfo interfaceInfo = new InterfaceInfo();
         interfaceInfo.setId(id);
         interfaceInfo.setStatus(InterfaceStatusEnum.OFFLINE.getValue());

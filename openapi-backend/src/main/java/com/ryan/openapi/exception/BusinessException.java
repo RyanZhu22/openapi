@@ -3,14 +3,13 @@ package com.ryan.openapi.exception;
 import com.ryan.openapi.common.ErrorCode;
 
 /**
- * 自定义异常类
+ * Custom exception
  *
- * @author ryan git
  */
 public class BusinessException extends RuntimeException {
 
     /**
-     * 错误码
+     * error code
      */
     private final int code;
 

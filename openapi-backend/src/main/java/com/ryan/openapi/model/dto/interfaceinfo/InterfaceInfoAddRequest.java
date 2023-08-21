@@ -5,47 +5,45 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * 创建请求
+ * create request
  *
- * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
- * @from <a href="https://yupi.icu">编程导航知识星球</a>
  */
 @Data
 public class InterfaceInfoAddRequest implements Serializable {
 
     /**
-     * 名称
+     * name
      */
     private String name;
 
     /**
-     * 描述
+     * description
      */
     private String description;
 
     /**
-     * 接口地址
+     * interface path
      */
     private String url;
 
     /**
-     * 请求参数
+     * request parameters
      */
     private String requestParams;
 
     /**
-     * 请求头
+     * request header
      */
     private String requestHeader;
 
     /**
-     * 响应头
+     * request header
      */
     private String responseHeader;
 
 
     /**
-     * 请求类型
+     * request type
      */
     private String method;
 

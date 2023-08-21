@@ -11,34 +11,34 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * 用户服务
+ * User service
  *
  */
 public interface UserService extends IService<User> {
 
     /**
-     * 用户注册
+     * user register
      *
-     * @param userAccount   用户账户
-     * @param userPassword  用户密码
-     * @param checkPassword 校验密码
-     * @return 新用户 id
+     * @param userAccount   user account
+     * @param userPassword  user password
+     * @param checkPassword check password
+     * @return new user id
      */
     long userRegister(String userAccount, String userPassword, String checkPassword);
 
     /**
-     * 用户登录
+     * user login
      *
-     * @param userAccount  用户账户
-     * @param userPassword 用户密码
+     * @param userAccount  user account
+     * @param userPassword user password
      * @param request
-     * @return 脱敏后的用户信息
+     * @return user information vo
      */
     LoginUserVO userLogin(String userAccount, String userPassword, HttpServletRequest request);
 
 
     /**
-     * 获取当前登录用户
+     * get the currently logged-in user
      *
      * @param request
      * @return
@@ -46,7 +46,7 @@ public interface UserService extends IService<User> {
     User getLoginUser(HttpServletRequest request);
 
     /**
-     * 获取当前登录用户（允许未登录）
+     * get the currently logged in user（allow not logged in）
      *
      * @param request
      * @return
@@ -54,7 +54,7 @@ public interface UserService extends IService<User> {
     User getLoginUserPermitNull(HttpServletRequest request);
 
     /**
-     * 是否为管理员
+     * check the user is admin
      *
      * @param request
      * @return
@@ -62,7 +62,7 @@ public interface UserService extends IService<User> {
     boolean isAdmin(HttpServletRequest request);
 
     /**
-     * 是否为管理员
+     * check the user is admin
      *
      * @param user
      * @return
@@ -70,7 +70,7 @@ public interface UserService extends IService<User> {
     boolean isAdmin(User user);
 
     /**
-     * 用户注销
+     * user logout
      *
      * @param request
      * @return
@@ -78,14 +78,14 @@ public interface UserService extends IService<User> {
     boolean userLogout(HttpServletRequest request);
 
     /**
-     * 获取脱敏的已登录用户信息
+     * get logged user information vo
      *
      * @return
      */
     LoginUserVO getLoginUserVO(User user);
 
     /**
-     * 获取脱敏的用户信息
+     * get user information vo
      *
      * @param user
      * @return
@@ -93,7 +93,7 @@ public interface UserService extends IService<User> {
     UserVO getUserVO(User user);
 
     /**
-     * 获取脱敏的用户信息
+     * get user information vo
      *
      * @param userList
      * @return
@@ -101,7 +101,7 @@ public interface UserService extends IService<User> {
     List<UserVO> getUserVO(List<User> userList);
 
     /**
-     * 获取查询条件
+     * get query condition
      *
      * @param userQueryRequest
      * @return

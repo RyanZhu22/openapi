@@ -6,8 +6,6 @@ import com.ryan.openapi.common.model.entity.User;
 import com.ryan.openapi.exception.BusinessException;
 import com.ryan.openapi.model.enums.UserRoleEnum;
 import com.ryan.openapi.service.UserService;
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -16,6 +14,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 
 @Aspect
@@ -26,7 +27,7 @@ public class AuthInterceptor {
     private UserService userService;
 
     /**
-     * 执行拦截
+     * Interceptor
      *
      * @param joinPoint
      * @param authCheck
@@ -57,7 +58,7 @@ public class AuthInterceptor {
                 }
             }
         }
-        // 通过权限校验，放行
+        // 通过权限validation，放行
         return joinPoint.proceed();
     }
 }

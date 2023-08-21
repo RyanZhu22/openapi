@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
 import java.io.Serializable;
 
 /**
- * 查询请求
+ * query request
  *
  */
 @EqualsAndHashCode(callSuper = true)
@@ -17,23 +17,23 @@ import java.io.Serializable;
 public class UserInterfaceInfoQueryRequest extends PageRequest implements Serializable {
 
     /**
-     * 主键
+     * primary key
      */
     @TableId(type = IdType.AUTO)
     private Long id;
 
     /**
-     * 总调用次数
+     * total of invoke
      */
     private Integer totalNum;
 
     /**
-     * 剩余调用次数
+     * left number of invoke
      */
     private Integer leftNum;
 
     /**
-     * 0-正常，1-禁用
+     * 0-normal，1-ban
      */
     private Integer status;
 

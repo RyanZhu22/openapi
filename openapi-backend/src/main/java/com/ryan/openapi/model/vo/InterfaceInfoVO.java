@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 接口信息封装视图（脱敏）
+ * interface information vo
  *
  **/
 @Data
@@ -14,7 +14,7 @@ public class InterfaceInfoVO implements Serializable {
 
 
     /**
-     * 调用次数
+     * total of invoke
      */
     private Integer totalNum;
 

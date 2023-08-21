@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * 创建请求
+ * create request
  *
  */
 @Data
@@ -13,22 +13,22 @@ public class UserInterfaceInfoAddRequest implements Serializable {
 
 
     /**
-     * 调用用户 id
+     * invoked user id
      */
     private Long userId;
 
     /**
-     * 接口 id
+     * interface id
      */
     private Long interfaceInfoId;
 
     /**
-     * 总调用次数
+     * total of invoke
      */
     private Integer totalNum;
 
     /**
-     * 剩余调用次数
+     * left number of invoke
      */
     private Integer leftNum;
 

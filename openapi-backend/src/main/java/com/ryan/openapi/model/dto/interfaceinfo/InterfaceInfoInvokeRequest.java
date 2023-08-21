@@ -12,17 +12,17 @@ import java.io.Serializable;
 public class InterfaceInfoInvokeRequest implements Serializable {
 
     /**
-     * 名称
+     * name
      */
     private Long id;
 
     /**
-     * 请求参数
+     * request parameters
      */
     private String userRequestParams;
 
     /**
-     * 请求类型
+     * request type
      */
     private String method;
 

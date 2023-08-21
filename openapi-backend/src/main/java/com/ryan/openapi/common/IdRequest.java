@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * id請求
+ * Common id request
  *
  * @author ryan
  */

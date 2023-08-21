@@ -22,16 +22,15 @@ public class InterfaceInfoServiceImpl extends ServiceImpl<InterfaceInfoMapper, I
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         String name = interfaceInfo.getName();
-        // TODO 接下来自己写
-        // 创建时，参数不能为空
+        // parameters cannot be null when creating
         if (add) {
             if (StringUtils.isAnyBlank(name)) {
                 throw new BusinessException(ErrorCode.PARAMS_ERROR);
             }
         }
-        // 有参数则校验
+        // validation if there are parameters
         if (StringUtils.isNotBlank(name) && name.length() > 50) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "名称过长");
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "The name is too long");
         }
     }
 

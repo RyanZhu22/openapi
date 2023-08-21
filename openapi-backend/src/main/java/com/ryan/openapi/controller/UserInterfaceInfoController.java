@@ -31,7 +31,7 @@ import java.util.List;
 
 
 /**
- * 接口信息接口
+ * Interface information controller
  */
 @RestController
 @RequestMapping("/userInterfaceInfo")
@@ -49,10 +49,10 @@ public class UserInterfaceInfoController {
 
     private final static Gson GSON = new Gson();
 
-    // region 增删改查
+    // region for CRUD
 
     /**
-     * 创建
+     * create
      *
      * @param userInterfaceInfoAddRequest
      * @param request
@@ -66,7 +66,7 @@ public class UserInterfaceInfoController {
         }
         UserInterfaceInfo userInterfaceInfo = new UserInterfaceInfo();
         BeanUtils.copyProperties(userInterfaceInfoAddRequest, userInterfaceInfo);
-        // 校验
+        // validation
         userInterfaceInfoService.validUserInterfaceInfo(userInterfaceInfo, true);
         User loginUser = userService.getLoginUser(request);
         userInterfaceInfo.setUserId(loginUser.getId());
@@ -79,7 +79,7 @@ public class UserInterfaceInfoController {
     }
 
     /**
-     * 删除
+     * delete
      *
      * @param deleteRequest
      * @param request
@@ -93,12 +93,12 @@ public class UserInterfaceInfoController {
         }
         User user = userService.getLoginUser(request);
         long id = deleteRequest.getId();
-        // 判断是否存在
+        // check if it exists
         UserInterfaceInfo oldInterfaceInfo = userInterfaceInfoService.getById(id);
         if (oldInterfaceInfo == null) {
             throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
         }
-        // 仅本人或管理员可删除
+        // only the user and admin can delete
         if (!oldInterfaceInfo.getUserId().equals(user.getId()) && !userService.isAdmin(request)) {
             throw new BusinessException(ErrorCode.NO_AUTH_ERROR);
         }
@@ -107,7 +107,7 @@ public class UserInterfaceInfoController {
     }
 
     /**
-     * 更新
+     * update
      *
      * @param userInterfaceInfoUpdateRequest
      * @param request
@@ -122,16 +122,16 @@ public class UserInterfaceInfoController {
         }
         UserInterfaceInfo userInterfaceInfo = new UserInterfaceInfo();
         BeanUtils.copyProperties(userInterfaceInfoUpdateRequest, userInterfaceInfo);
-        // 参数校验
+        // parameters validation
         userInterfaceInfoService.validUserInterfaceInfo(userInterfaceInfo, false);
         User user = userService.getLoginUser(request);
         long id = userInterfaceInfoUpdateRequest.getId();
-        // 判断是否存在
+        // check if it exists
         UserInterfaceInfo oldInterfaceInfo = userInterfaceInfoService.getById(id);
         if (oldInterfaceInfo == null) {
             throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
         }
-        // 仅本人或管理员可修改
+        // only the user and admin can update
         if (!oldInterfaceInfo.getUserId().equals(user.getId()) && !userService.isAdmin(request)) {
             throw new BusinessException(ErrorCode.NO_AUTH_ERROR);
         }
@@ -140,7 +140,7 @@ public class UserInterfaceInfoController {
     }
 
     /**
-     * 根据 id 获取
+     * get interface information by id
      *
      * @param id
      * @return
@@ -156,7 +156,7 @@ public class UserInterfaceInfoController {
     }
 
     /**
-     * 获取列表（仅管理员可使用）
+     * get list (only admin)
      *
      * @param userInterfaceInfoQueryRequest
      * @return
@@ -174,7 +174,7 @@ public class UserInterfaceInfoController {
     }
 
     /**
-     * 分页获取列表
+     * get list by pagination
      *
      * @param userInterfaceInfoQueryRequest
      * @param request
@@ -192,7 +192,7 @@ public class UserInterfaceInfoController {
         long size = userInterfaceInfoQueryRequest.getPageSize();
         String sortField = userInterfaceInfoQueryRequest.getSortField();
         String sortOrder = userInterfaceInfoQueryRequest.getSortOrder();
-        // 限制爬虫
+        // restriction of crawlers
         if (size > 50) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }

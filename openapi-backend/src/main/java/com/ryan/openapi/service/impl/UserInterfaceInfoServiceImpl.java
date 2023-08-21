@@ -11,11 +11,7 @@ import com.ryan.openapi.mapper.UserInterfaceInfoMapper;
 import com.ryan.openapi.service.UserInterfaceInfoService;
 import org.springframework.stereotype.Service;
 
-/**
-* @author ryan
-* @description 针对表【user_interface_info(用户调用接口关系)】的数据库操作Service实现
-* @createDate 2023-06-02 19:44:17
-*/
+
 @Service
 public class UserInterfaceInfoServiceImpl extends ServiceImpl<UserInterfaceInfoMapper, UserInterfaceInfo>
     implements UserInterfaceInfoService {

@@ -1,7 +1,7 @@
 package com.ryan.openapi.common;
 
 /**
- * 自定义错误码
+ * Custom error code
  *
  */
 public enum ErrorCode {
@@ -16,12 +16,12 @@ public enum ErrorCode {
     OPERATION_ERROR(50001, "操作失败");
 
     /**
-     * 状态码
+     * status code
      */
     private final int code;
 
     /**
-     * 信息
+     * message
      */
     private final String message;
 
