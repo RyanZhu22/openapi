@@ -266,4 +266,6 @@ public class UserController {
         ThrowUtils.throwIf(!result, ErrorCode.OPERATION_ERROR);
         return ResultUtils.success(true);
     }
+
+    // Math.isPrime(int) returns whether the given number is prime or not
 }

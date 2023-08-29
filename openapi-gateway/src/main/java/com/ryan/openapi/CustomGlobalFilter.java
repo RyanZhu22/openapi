@@ -82,7 +82,7 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
         String timestamp = headers.getFirst("timestamp");
         String sign = headers.getFirst("sign");
         String body = headers.getFirst("body");
-        // TODO 实际情况中是从数据库中查询是否分配给用户
+        // TODO 服务调用：实际情况中是从数据库中查询是否分配给用户
         User invokeUser = null;
         try {
             invokeUser = innerUserService.getInvokeUser(accessKey);
@@ -108,7 +108,7 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
             return handleNoAuth(response);
         }
 //        4. 请求模拟接口是否存在
-        // TODO 从数据库中查询模拟接口是否存在，以及存请求方法是否匹配，(还可以校验请求参数）
+        // TODO 服务调用：从数据库中查询模拟接口是否存在，以及存请求方法是否匹配，(还可以校验请求参数）
         InterfaceInfo interfaceInfo = null;
         try {
             interfaceInfo = innerInterfaceInfoService.getInterfaceInfo(path, method);
@@ -146,7 +146,7 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
                             // 拼接字符串
                             return super.writeWith(
                                 fluxBody.map(dataBuffer -> {
-                                    // 7. TODO 调用成功，接口调用次数+1 + 1 invokeCount
+                                    // 7. TODO 服务调用：调用成功，接口调用次数+1 + 1 invokeCount
                                     try {
                                         innerUserInterfaceInfoService.invokeCount(interfaceInfoId, userId);
                                     } catch (Exception e) {
